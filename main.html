@@ -22,7 +22,7 @@
             background-color: #ffffff;
             color: #000000;
         }
-
+        
         /* Top Bar */
         .top-bar {
             display: flex;
@@ -30,11 +30,12 @@
             justify-content: space-between;
             background-color: #1e1e1e;
             padding: 10px 20px;
-            width: 100%;
             position: fixed;
             top: 0;
             left: 0;
+            width: 100%;
             z-index: 1000;
+            flex-wrap: wrap;
         }
 
         .light-theme .top-bar {
@@ -49,6 +50,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            flex-wrap: wrap;
         }
 
         .search-bar, .filter-dropdown {
@@ -88,7 +90,7 @@
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
         }
-
+        
         .light-theme .settings-menu {
             background-color: #f0f0f0;
         }
@@ -109,8 +111,9 @@
 
         /* Main Content */
         .main-container {
-            margin-top: 80px;
-            width: 60%;
+            margin-top: 100px; /* Adjusted for better spacing */
+            width: 90%;
+            max-width: 1200px;
             padding: 20px;
             display: flex;
             flex-direction: column;
@@ -168,6 +171,59 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
+        /* Media Queries for Responsiveness */
+        @media screen and (max-width: 768px) {
+            .top-bar {
+                padding: 10px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .top-right {
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 10px;
+            }
+
+            .main-container {
+                width: 95%;
+                margin-top: 120px;
+            }
+
+            .post {
+                padding: 10px;
+            }
+
+            .emoji-btn {
+                font-size: 30px;
+                bottom: 10px;
+            }
+
+            .feedback-complaint {
+                bottom: 60px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .logo img {
+                height: 30px;
+            }
+
+            .search-bar, .filter-dropdown {
+                font-size: 14px;
+                padding: 5px;
+            }
+
+            .settings-btn {
+                font-size: 16px;
+            }
+
+            .settings-menu {
+                top: 110px;
+            }
+            
+        }
     </style>
 </head>
 <body>
@@ -175,8 +231,7 @@
     <!-- Top Bar -->
     <div class="top-bar">
         <div class="logo">
-            <img src="revan.jpg" 
-            title = "REVELATION">
+            <img src="revan.jpg" title="REVELATION">
         </div>
         <div class="top-right">
             <input type="text" class="search-bar" placeholder="Search...">
@@ -188,8 +243,7 @@
             <button class="settings-btn">⚙</button>
             <div class="settings-menu">
                 <button onclick="toggleTheme()">Toggle Theme</button>
-                <a href = "sigin.html"><button >Sign In/Sign Up</button></a>
-                
+                <a href="sigin.html"><button>Sign In/Sign Up</button></a>
             </div>
         </div>
     </div>
@@ -211,8 +265,8 @@
 
     <!-- Feedback & Complaint Buttons -->
     <div class="feedback-complaint" id="feedbackComplaint">
-        <a href ="feedback.html"><button class="feedback-btn" >Feedback</button></a>
-        <a href = "complaint.html"><button class="complaint-btn">Complaint</button></a>
+        <a href="feedback.html"><button class="feedback-btn">Feedback</button></a>
+        <a href="complaint.html"><button class="complaint-btn">Complaint</button></a>
     </div>
 
     <script>
@@ -267,7 +321,5 @@
             }
         });
     </script>
-    
-
 </body>
 </html>
