@@ -77,6 +77,25 @@
             font-size: 1.3em; /* Increased font size for better visibility */
             line-height: 1;
         }
+        /* New style for the eye icon in the sign-up form */
+        #signUpEye {
+            background: #fff;
+            color: #333;
+            margin: 5px 0 0 0;
+            margin-left: -20px;
+            padding: 8px 9px 8px 7px;
+            border-radius: 0px 5px 5px 0px;
+            float: right;
+            position: relative;
+            right: -7%;
+            top: 3%;
+            z-index: 5;
+            cursor: pointer;
+            font-size: 1.3em; /* Increased font size for better visibility */
+            line-height: 1;
+        }
+
+            
 
         input.form-input {
             width: 240px;
@@ -284,6 +303,7 @@
 </div>
 
 <!-- Sign Up Form -->
+<!-- Sign Up Form -->
 <div class="overlay" id="signUpForm" style="display:none;">
     <form>
         <div class="con">
@@ -308,7 +328,7 @@
                 </span>
                 <input class="form-input" type="password" placeholder="Password" id="signUpPwd" required>
                 <span>
-                    <i class="fa fa-eye" aria-hidden="true" type="button" id="signUpEye"></i>
+                    <i class="fa fa-eye" aria-hidden="true" type="button" id="signUpEye">👁️</i>
                 </span>
                 <br>
                 <button class="log-in" type="submit">Sign Up</button>
@@ -319,6 +339,7 @@
         </div>
     </form>
 </div>
+
 
 <script>
     function show() {
