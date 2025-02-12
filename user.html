@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .profile-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        button {
+            background: blue;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h2>Profile</h2>
+        <p><strong>Username:</strong> <span id="username">JohnDoe</span></p>
+        <p><strong>Email:</strong> <span id="email">johndoe@example.com</span></p>
+        <p><strong>Role:</strong> <span id="role">Student</span></p>
+        <button onclick="editRole()">Edit Role</button>
+    </div>
+    
+    <script>
+        function editRole() {
+            let password = prompt("Enter the admin password to set role to Staff:");
+            if (password === "admin123") {
+                document.getElementById("role").innerText = "Staff";
+                alert("Role updated to Staff.");
+            } else if (password !== null) {
+                alert("Incorrect password. Role remains unchanged.");
+            }
+        }
+    </script>
+</body>
+</html>
