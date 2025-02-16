@@ -1,0 +1,23 @@
+<form id="postForm">
+    <textarea id="postContent" placeholder="Write something..."></textarea>
+    <button type="submit">Post</button>
+</form>
+
+<script>
+    document.getElementById("postForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+        let content = document.getElementById("postContent").value;
+
+        if (content.trim() === "") return;
+
+        let response = await fetch("post.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "content=" + encodeURIComponent(content),
+        });
+
+        let result = await response.json();
+        alert(result.success || result.error);
+        document.getElementById("postContent").value = "";
+    });
+</script>

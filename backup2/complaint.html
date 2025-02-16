@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; background: #f4f4f4; }
+        .post-box { display: flex; gap: 10px; margin-bottom: 20px; }
+        .post-box textarea { flex: 1; padding: 10px; }
+        .post-box button { padding: 10px; cursor: pointer; }
+        .post { background: white; padding: 15px; margin-bottom: 10px; border-radius: 5px; }
+        .post button { margin-left: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h2>File a Complaint</h2>
+    <div class="post-box">
+        <textarea id="postContent" placeholder="Write something..."></textarea>
+        <button onclick="createPost()">Post</button>
+    </div>
+
+    
+    <div id="postFeed"></div>
+
+    <script>
+        async function loadPosts() {
+            let response = await fetch("http://127.0.0.1:5000/posts");
+            let data = await response.json();
+            document.getElementById("postFeed").innerHTML = ""; // Clear posts
+            
+            data.forEach(post => {
+                const postElement = document.createElement("div");
+                postElement.classList.add("post");
+                postElement.innerHTML = `
+                    <p>${post.content}</p>
+                    <button onclick="editPost(${post.id})">Edit</button>
+                    <button onclick="deletePost(${post.id})">Delete</button>
+                    <button onclick="vote(${post.id}, 'upvote')">👍 ${post.votes}</button>
+                    <button onclick="vote(${post.id}, 'downvote')">👎</button>
+                `;
+                document.getElementById("postFeed").appendChild(postElement);
+            });
+        }
+
+        async function createPost() {
+            let content = document.getElementById("postContent").value;
+            if (!content.trim()) return;
+            
+            await fetch("http://127.0.0.1:5000/posts", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ content })
+            });
+
+            document.getElementById("postContent").value = ""; 
+            loadPosts();
+        }
+
+        async function editPost(id) {
+            let newContent = prompt("Edit your post:");
+            if (!newContent) return;
+
+            await fetch(`http://127.0.0.1:5000/posts/${id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ content: newContent })
+            });
+
+            loadPosts();
+        }
+
+        async function deletePost(id) {
+            await fetch(`http://127.0.0.1:5000/posts/${id}`, { method: "DELETE" });
+            loadPosts();
+        }
+
+        async function vote(id, type) {
+            await fetch(`http://127.0.0.1:5000/posts/${id}/${type}`, { method: "POST" });
+            loadPosts();
+        }
+
+        document.addEventListener("DOMContentLoaded", loadPosts);
+    </script>
+
+</body>
+</html>

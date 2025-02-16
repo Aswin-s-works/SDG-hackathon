@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign Up Form</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Alegreya|Arima+Madurai|Dancing+Script|Dosis|Merriweather|Oleo+Script|Overlock|PT+Serif|Pacifico|Playball|Playfair+Display|Share|Unica+One|Vibur" rel="stylesheet">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            font-family: 'Abel', sans-serif;
+            opacity: .95;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        form {
+            width: 450px;
+            min-height: 500px;
+            border-radius: 5px;
+            box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
+            padding: 2%;
+            background-image: linear-gradient(-225deg, #E3FDF5 50%, #FFE6FA 50%);
+            text-align: center;
+        }
+
+        header h2 {
+            font-size: 250%;
+            font-family: 'Playfair Display', serif;
+            color: #3e403f;
+        }
+
+        .form-input {
+            width: 100%;
+            height: 50px;
+            margin-top: 2%;
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .password-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        button {
+            width: 100%;
+            height: 50px;
+            background: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            transform: translateY(3px);
+        }
+
+        .toggle-form, .forgot-password {
+            margin-top: 20px;
+        }
+
+        @media screen and (max-width: 600px) {
+            form {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="loginForm">
+            <header>
+                <h2>Log In</h2>
+                <p>Login using your username and password</p>
+            </header>
+            <input class="form-input" type="text" placeholder="Username or e-mail" required>
+            <div class="password-container">
+                <input class="form-input" type="password" id="loginPassword" placeholder="Password" required>
+                <span class="toggle-password" onclick="togglePassword('loginPassword')">👁️</span>
+            </div>
+            <div class="forgot-password">
+                <a href="#">Forgot Password?</a>
+            </div>
+            <button type="submit">Log In</button>
+            <div class="toggle-form">
+                <p>Don't have an account? <a href="#" onclick="toggleForm()">Sign Up</a></p>
+            </div>
+        </form>
+        
+        <form id="signUpForm" style="display: none;">
+            <header>
+                <h2>Sign Up</h2>
+                <p>Register a new account</p>
+            </header>
+            <input class="form-input" type="email" placeholder="Email Address" required>
+            <input class="form-input" type="text" placeholder="Username" required>
+            <div class="password-container">
+                <input class="form-input" type="password" id="signUpPassword" placeholder="Password" required>
+                <span class="toggle-password" onclick="togglePassword('signUpPassword')">👁️</span>
+            </div>
+            <button type="submit">Sign Up</button>
+            <div class="toggle-form">
+                <p>Already have an account? <a href="#" onclick="toggleForm()">Log In</a></p>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        function toggleForm() {
+            var loginForm = document.getElementById('loginForm');
+            var signUpForm = document.getElementById('signUpForm');
+            if (loginForm.style.display === "none") {
+                loginForm.style.display = "block";
+                signUpForm.style.display = "none";
+            } else {
+                loginForm.style.display = "none";
+                signUpForm.style.display = "block";
+            }
+        }
+
+        function togglePassword(id) {
+            var passwordField = document.getElementById(id);
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+            } else {
+                passwordField.type = "password";
+            }
+        }
+    </script>
+</body>
+</html>
